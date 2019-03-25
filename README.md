@@ -1,6 +1,5 @@
-# Sorting
-Using different sorting methods to organize 
-1. Bubblesort for Integers
-2. Bubblesort for Strings
-3. Quicksort for Integers
-4. Quicksort for Strings
+This is a repository for all files that have to do with Computer Science II:
+
+Branches:
+-Console Applications
+-Windows Forms
