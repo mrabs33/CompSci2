@@ -1,0 +1,122 @@
+ Main:
+ #region QuickSort Ints
+            int[] stupidArray2 = RandomIntArrayFill(100);
+            Console.WriteLine("\n\nThis is the array without sorting:");
+            PrintArray(stupidArray2);//print to console        
+                
+            QuickSort(stupidArray2, 0, stupidArray2.Length - 1);//use first index and length-1
+            Console.WriteLine("\n\nThis is the array after Quick Sorting:");
+            PrintArray(stupidArray2);
+            #endregion
+
+            string[] sameDiffWords50 = { "I", "hear", "the" , "drums", "echoing", "tonight",
+                "But", "she", "hears", "only", "whispers", "of", "some", "quiet", "conversation",
+"She's",  "coming", "in", "twelve", "thirty", "flight",
+ "The", "moonlit", "wings", "reflect", "the", "stars", "that", "guide", "me", "towards", "salvation",
+ "I", "stopped", "an", "old", "man", "along", "the", "way",
+ "Hoping", "to", "find", "some", "old", "forgotten", "words", "or", "ancient", "melodies",};
+            Console.WriteLine("This is the string array before sorting:");
+            PrintStringArray(sameDiffWords50);
+
+            QuickSortString(sameDiffWords50, 0, sameDiffWords50.Length - 1);
+            Console.WriteLine("\n\n\nThis is the string array after sorting:");
+            PrintStringArray(sameDiffWords50);
+            
+Methods:
+ #region QuickSort Integers
+        public static void QuickSort(int[] A, int left, int right)
+            {
+    if (left > right || left < 0 || right < 0) return;
+
+    int index = partition(A, left, right);
+
+    if (index != -1)
+    {
+        QuickSort(A, left, index - 1);
+        QuickSort(A, index + 1, right);
+    }
+}
+
+    private static int partition(int[] A, int left, int right)
+        {
+            if (left > right) return -1;
+
+            int end = left;
+
+            int pivot = A[right];    // choose last one to pivot, easy to code
+            for (int i = left; i < right; i++)
+            {
+                if (A[i] < pivot)
+                {
+                    swap(A, i, end);
+                    end++;
+                }
+            }
+
+            swap(A, end, right);
+
+            return end;
+        }
+
+        private static void swap(int[] A, int left, int right)
+        {
+            int temp = A[left];
+            A[left] = A[right];
+            A[right] = temp;
+        }
+        #endregion
+
+        private static void QuickSortString(String[] a, int start, int end)
+        {
+            // index for the "left-to-right scan"
+            int i = start;
+            // index for the "right-to-left scan"
+            int j = end;
+
+            // only examine arrays of 2 or more elements.
+            if (j - i >= 1)
+            {
+                // The pivot point of the sort method is arbitrarily set to the first element int the array.
+                String pivot = a[i];
+                // only scan between the two indexes, until they meet.
+                while (j > i)
+                {
+                    // from the left, if the current element is lexicographically less than the (original)
+                    // first element in the String array, move on. Stop advancing the counter when we reach
+                    // the right or an element that is lexicographically greater than the pivot String.
+                    while (a[i].CompareTo(pivot) <= 0 && i < end && j > i)
+                    {
+                        i++;
+                    }
+                    // from the right, if the current element is lexicographically greater than the (original)
+                    // first element in the String array, move on. Stop advancing the counter when we reach
+                    // the left or an element that is lexicographically less than the pivot String.
+                    while (a[j].CompareTo(pivot) >= 0 && j > start && j >= i)
+                    {
+                        j--;
+                    }
+                    // check the two elements in the center, the last comparison before the scans cross.
+                    if (j > i)
+                        swap(a, i, j);
+                }
+                // At this point, the two scans have crossed each other in the center of the array and stop.
+                // The left partition and right partition contain the right groups of numbers but are not
+                // sorted themselves. The following recursive code sorts the left and right partitions.
+
+                // Swap the pivot point with the last element of the left partition.
+                swap(a, start, j);
+                // sort left partition
+                QuickSortString(a, start, j - 1);
+                // sort right partition
+                QuickSortString(a, j + 1, end);
+            }
+        }
+        /**
+         * This method facilitates the quickSort method's need to swap two elements, Towers of Hanoi style.
+         */
+        private static void swap(String[] a, int i, int j)
+        {
+            String temp = a[i];
+            a[i] = a[j];
+            a[j] = temp;
+        }
