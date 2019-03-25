@@ -1,0 +1,105 @@
+Main:
+int[] stupidArray1 = RandomIntArrayFill(100);
+            Console.WriteLine("\n\nThis is the array without sorting:");
+            PrintArray(stupidArray1);//print to console
+
+            Console.WriteLine("This is the array after Bubble Sort:");
+            stupidArray1 = BubbleSort(stupidArray1);
+            PrintArray(stupidArray1);
+
+            string[] diffWords50 = { "I", "hear", "the" , "drums", "echoing", "tonight",
+                "But", "she", "hears", "only", "whispers", "of", "some", "quiet", "conversation",
+"She's",  "coming", "in", "twelve", "thirty", "flight",
+ "The", "moonlit", "wings", "reflect", "the", "stars", "that", "guide", "me", "towards", "salvation",
+ "I", "stopped", "an", "old", "man", "along", "the", "way",
+ "Hoping", "to", "find", "some", "old", "forgotten", "words", "or", "ancient", "melodies",};
+            Console.WriteLine("\n\nThis is the array before BubbeSortString:");
+            PrintStringArray(diffWords50);
+            Console.WriteLine("\n\nThis is the array after BubbleSort String:");
+            string[] sortedStrings = BubbleSortString(diffWords50);
+            PrintStringArray(sortedStrings);
+            
+Methods:
+#region BubbleSort Methods
+        public static int[] RandomIntArrayFill(int x)//fill it with x many values)
+        {
+            Random rnd = new Random();
+            int[] arrayReturned = new int [x];
+            for (int i = 0; i < x; i++)
+            {
+                arrayReturned[i] = rnd.Next(1, 10);
+            }
+            return arrayReturned;
+        }
+        public static void PrintArray(int[] x)
+        {
+            foreach (var item in x)
+            {
+                Console.Write(item.ToString() + ", ");
+            }
+            Console.WriteLine("\n\n");
+        }
+        public static void PrintStringArray(string[] x)
+        {
+            foreach (var item in x)
+            {
+                Console.Write(item.ToString() + ", ");
+            }
+            Console.WriteLine("\n\n");
+        }
+        public static void Swap(ref int x, ref int y)
+        {
+            //think apple and orange juice
+            int temp = x;
+            x = y;
+            y = temp;
+            //uses temporary third to store the one before you swap
+        }
+        public static void SwapString(ref string x, ref string y)
+        {
+            string temp = y;
+            y = x;
+            x = temp;
+        }
+        public static int[] BubbleSort(int[] x)
+        {
+            for (int i = 0; i < x.Length; i++)
+            {
+                //start a second spot (x[1]) and run left to right checking each pair of elements
+                for (int j = 1; j < x.Length; j++)//the for loop is for moving through the array ONCE
+                {
+                    if (x[j] < x[j - 1])//if the second is less than the first value swap it
+                    {
+                        Swap(ref x[j], ref x[j - 1]);
+                    }
+                }
+            }
+            return x;
+        }
+        public static string[] BubbleSortString(string[] x)
+        {
+            string[] firstLetters = new string[x.Length];
+
+            //for (int i = 0; i < x.Length; i++)
+            //{
+            //    char[] tempCharArray = x[i].ToCharArray();
+            //    firstLetters[i] = Convert.ToString(tempCharArray[0]);
+            //}
+            for (int j = 0; j < x.Length; j++)
+            {
+                for (int i = 0; i < (x.Length - 1); i++)
+                {
+                    if (string.Compare(x[i], x[i + 1]) > 0) //if first number is greater then second then swap
+                    {
+                        //swap
+                        SwapString(ref x[i], ref x[i + 1]);
+                        //temp = letters[index];
+                        //letters[index] = letters[index + 1];
+                        //letters[index + 1] = temp;
+                        //swap = true;
+                    }
+                }
+            }
+            return x;
+        }
+        #endregion
