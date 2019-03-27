@@ -1,5 +1,3 @@
-This is a repository for all files that have to do with Computer Science II:
+This is a repository for all files that have to do Sorting:
 
-Branches:
--Console Applications
--Windows Forms
+
